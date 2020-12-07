@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content white-text">
+                <div class="row">
+                    <div class="col s5">
+                        <form #gameForm="ngForm" (ngSubmit)="onSubmit(gameForm)">
+                            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="gameService.selectedGame._id">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input type="text" name="school1" #school1="ngModel" [(ngModel)]="gameService.selectedGame.school1" placeholder="Enter school1" required>
+                                    <label>School1 :
+                                        <label class="red-text">*</label>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input type="text" name="school2" #school2="ngModel" [(ngModel)]="gameService.selectedGame.school2" placeholder="Enter school2">
+                                    <label>School2 :
+                                        <label class="red-text">*</label>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input type="text" name="game" #game="ngModel" [(ngModel)]="gameService.selectedGame.game" placeholder="Enter game">
+                                    <label>Game :
+                                        <label class="red-text">*</label>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input type="datetime-local" name="date" #date="ngModel" [(ngModel)]="gameService.selectedGame.date">
+                                    <label>Date :
+                                        <label class="red-text">*</label>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <button class="btn btn-custom right" type="button" (click)="resetForm(gameForm)">Reset</button>
+                                    <button class="btn btn-custom right" type="submit" [disabled]="!gameForm.valid">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col s7">
+                        <table class="responsive-table highlight">
+                            <thead>
+                                <tr>
+                                    <th>School1</th>
+                                    <th>School2</th>
+                                    <th>Game</th>
+                                    <th>Date</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tr *ngFor="let game of gameService.games">
+                                <td>{{game.school1}}</td>
+                                <td>{{game.school2}}</td>
+                                <td>{{game.game}}</td>
+                                <td>{{game.date}}</td>
+                                <td>
+                                    <a class="action-btn" (click)="onEdit(game)">
+                                        <i class="material-icons">edit</i>
+                                    </a>
+                                    <a class="action-btn">
+                                        <i class="material-icons" (click)="onDelete(game._id, gameForm)">delete</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
